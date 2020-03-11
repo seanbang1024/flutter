@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
           "Index_page": (context) => Index(),
           "Regist_page": (context) => Regist(),
           "Webview_page": (context) => WebViewPageCustom(),
-          "user_info_page":(context) => UserInfo(),
-          "about_us_page":(context) => AboutUs(),
+          "user_info_page": (context) => UserInfo(),
+          "about_us_page": (context) => AboutUs(),
           "/": (context) => MyHomePage(title: 'Flutter Demo Home Page'),
         },
         title: 'Flutter Demo',
@@ -94,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
   getLoginState() {
     String json = SharedPreferencesUtil.preferences.getString('LoginInfo');
     loginState = 0;
+
     if (json != null) {
       Map<String, dynamic> user = convert.jsonDecode(json);
 //      print('isLogin: $user');

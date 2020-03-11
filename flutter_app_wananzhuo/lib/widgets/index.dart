@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_loan/commons/ColorUtil.dart';
 import 'package:flutter_app_loan/commons/NetworkManager.dart';
+import 'package:flutter_app_loan/generated/json/base/json_convert_content.dart';
 import 'package:flutter_app_loan/models/banner_model_list_entity.dart';
 import 'package:flutter_app_loan/models/base_model_entity.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_app_loan/models/chapters_model_entity.dart';
 import 'package:flutter_app_loan/models/home_article_listX_entity.dart';
 import 'package:flutter_app_loan/models/web_model_entity.dart';
 
@@ -22,6 +24,7 @@ class _IndexState extends State<Index> with AutomaticKeepAliveClientMixin {
     getListData();
     isRequest = true;
     getArticleList();
+    getChapterData();
   }
 
   getListData() {
@@ -34,6 +37,16 @@ class _IndexState extends State<Index> with AutomaticKeepAliveClientMixin {
         });
 //        print(listData);
       });
+    }, null);
+  }
+  
+  getChapterData() {
+    DioManager.getInstance().get('/wxarticle/chapters/json', null, (BaseModelEntity baseModelEntity) {
+      var chapterListData = List<ChaptersModelEntity>();
+      (baseModelEntity.data as List).forEach((v) {
+        chapterListData.add(JsonConvert.fromJsonAsT(v));
+      });
+      print(chapterListData[0].id);
     }, null);
   }
 
